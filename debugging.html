@@ -1,0 +1,369 @@
+root@localhost:~/tutorial# head sequences.fa
+>chr1:54549249-54549348
+CTCACCTGCTCACACGGCTACCCGAGGATGATTTTCACATCCCTTACTTG
+AGACGAAGGGATGTTGGCACTCTGGCTCCTGCCCATGCCTCCCTTTTTCT
+>chr1:155537868-155537967
+ACATTCCTGCCACCTCTCTGGAAGCCACTCCTGAGTCTTATCTGCTGATC
+TGATTTGGCCTACCAGACTTCCAGATGTTGGAATTCCTTAGGTTCAGTCA
+>chr1:161313879-161313978
+TTCTCGAGGCCCCTCTACACACTCCCCAACTTAGGTCACAATTTATGTAT
+CTGTCTGGTTAAAGCTTCGTATTAGAAAGGGAGGGAACCCAAAGTATCTT
+>chr2:86402297-86402396
+root@localhost:~/tutorial# grep > sequences.fa
+Usage: grep [OPTION]... PATTERNS [FILE]...
+Try 'grep --help' for more information.
+root@localhost:~/tutorial# cat sequences.fa
+root@localhost:~/tutorial# curl https://sandbox.bio/data/debugging-puzzles/sequences.fa > sequences.fa
+---------------------------------------------------
+Warning: curl is not fully supported on sandbox.bio
+Only the following commands are supported:
+   curl -O url
+   curl -o filename url
+URLs must be CORS-enabled to be downloadable.
+---------------------------------------------------
+Fetching "https://sandbox.bio/data/debugging-puzzles/sequences.fa"...
+---------------------------------------------------
+
+root@localhost:~/tutorial# grep ">" sequence.fa
+grep: sequence.fa: No such file or directory
+root@localhost:~/tutorial# grep ">" sequences.fa
+>chr1:54549249-54549348
+>chr1:155537868-155537967
+>chr1:161313879-161313978
+>chr2:86402297-86402396
+>chr2:127638713-127638812
+>chr2:139306743-139306842
+>chr3:124285707-124285806
+>chr3:149453275-149453374
+>chr3:182758051-182758150
+>chr4:61196301-61196400
+>chr4:84309031-84309130
+>chr4:123538993-123539092
+>chr5:8817770-8817869
+>chr5:11423126-11423225
+>chr5:150317286-150317385
+root@localhost:~/tutorial# touch sequences.txt
+root@localhost:~/tutorial# grep ">" sequences.fa > sequences.txt
+root@localhost:~/tutorial# grep ">" sequences.txt
+>chr1:54549249-54549348
+>chr1:155537868-155537967
+>chr1:161313879-161313978
+>chr2:86402297-86402396
+>chr2:127638713-127638812
+>chr2:139306743-139306842
+>chr3:124285707-124285806
+>chr3:149453275-149453374
+>chr3:182758051-182758150
+>chr4:61196301-61196400
+>chr4:84309031-84309130
+>chr4:123538993-123539092
+>chr5:8817770-8817869
+>chr5:11423126-11423225
+>chr5:150317286-150317385
+root@localhost:~/tutorial# cat chromosomes.txt
+chr18
+chr4
+chr21
+chr7
+chr12
+chr11
+chr1
+chrM
+chr19
+chrX
+chr17
+chr22
+chr8
+chr13
+chr3
+chr14
+chr10
+chrY
+chr16
+chr20
+chr6
+chr5
+chr15
+chr2
+chr9
+root@localhost:~/tutorial# sort -n chromosomes.txt
+chr1
+chr10
+chr11
+chr12
+chr13
+chr14
+chr15
+chr16
+chr17
+chr18
+chr19
+chr2
+chr20
+chr21
+chr22
+chr3
+chr4
+chr5
+chr6
+chr7
+chr8
+chr9
+chrM
+chrX
+chrY
+root@localhost:~/tutorial# sort --help
+Usage: sort [OPTION]... [FILE]...
+  or:  sort [OPTION]... --files0-from=F
+Write sorted concatenation of all FILE(s) to standard output.
+
+With no FILE, or when FILE is -, read standard input.
+
+Mandatory arguments to long options are mandatory for short options too.
+Ordering options:
+
+  -b, --ignore-leading-blanks  ignore leading blanks
+  -d, --dictionary-order      consider only blanks and alphanumeric characters
+  -f, --ignore-case           fold lower case to upper case characters
+  -g, --general-numeric-sort  compare according to general numerical value
+  -i, --ignore-nonprinting    consider only printable characters
+  -M, --month-sort            compare (unknown) < 'JAN' < ... < 'DEC'
+  -h, --human-numeric-sort    compare human readable numbers (e.g., 2K 1G)
+  -n, --numeric-sort          compare according to string numerical value
+  -R, --random-sort           shuffle, but group identical keys.  See shuf(1)
+      --random-source=FILE    get random bytes from FILE
+  -r, --reverse               reverse the result of comparisons
+      --sort=WORD             sort according to WORD:
+                                general-numeric -g, human-numeric -h, month -M,
+                                numeric -n, random -R, version -V
+  -V, --version-sort          natural sort of (version) numbers within text
+
+Other options:
+
+      --batch-size=NMERGE   merge at most NMERGE inputs at once;
+                            for more use temp files
+  -c, --check, --check=diagnose-first  check for sorted input; do not sort
+  -C, --check=quiet, --check=silent  like -c, but do not report first bad line
+      --compress-program=PROG  compress temporaries with PROG;
+                              decompress them with PROG -d
+      --debug               annotate the part of the line used to sort,
+                              and warn about questionable usage to stderr
+      --files0-from=F       read input from the files specified by
+                            NUL-terminated names in file F;
+                            If F is - then read names from standard input
+  -k, --key=KEYDEF          sort via a key; KEYDEF gives location and type
+  -m, --merge               merge already sorted files; do not sort
+  -o, --output=FILE         write result to FILE instead of standard output
+  -s, --stable              stabilize sort by disabling last-resort comparison
+  -S, --buffer-size=SIZE    use SIZE for main memory buffer
+  -t, --field-separator=SEP  use SEP instead of non-blank to blank transition
+  -T, --temporary-directory=DIR  use DIR for temporaries, not $TMPDIR or /tmp;
+                              multiple options specify multiple directories
+      --parallel=N          change the number of sorts run concurrently to N
+  -u, --unique              with -c, check for strict ordering;
+                              without -c, output only the first of an equal run
+  -z, --zero-terminated     line delimiter is NUL, not newline
+      --help        display this help and exit
+      --version     output version information and exit
+
+KEYDEF is F[.C][OPTS][,F[.C][OPTS]] for start and stop position, where F is a
+field number and C a character position in the field; both are origin 1, and
+the stop position defaults to the line's end.  If neither -t nor -b is in
+effect, characters in a field are counted from the beginning of the preceding
+whitespace.  OPTS is one or more single-letter ordering options [bdfgiMhnRrV],
+which override global ordering options for that key.  If no key is given, use
+the entire line as the key.  Use --debug to diagnose incorrect key usage.
+
+SIZE may be followed by the following multiplicative suffixes:
+% 1% of memory, b 1, K 1024 (default), and so on for M, G, T, P, E, Z, Y.
+
+*** WARNING ***
+The locale specified by the environment affects sort order.
+Set LC_ALL=C to get the traditional sort order that uses
+native byte values.
+
+GNU coreutils online help: <https://www.gnu.org/software/coreutils/>
+Full documentation <https://www.gnu.org/software/coreutils/sort>
+or available locally via: info '(coreutils) sort invocation'
+root@localhost:~/tutorial# sort -V chromosomes.txt
+chr1
+chr2
+chr3
+chr4
+chr5
+chr6
+chr7
+chr8
+chr9
+chr10
+chr11
+chr12
+chr13
+chr14
+chr15
+chr16
+chr17
+chr18
+chr19
+chr20
+chr21
+chr22
+chrM
+chrX
+chrY
+root@localhost:~/tutorial# touch chromosomes.sorted.txt
+root@localhost:~/tutorial# sort -V chromosomes.txt > chromosomes.sorted.txt
+root@localhost:~/tutorial# samtools view alignments.bam
+r0020ref9301S2I6M1P1I1P1I4M2I*00AAAAGATAAGGGATAAA*
+x50ref2123024M*00AATAATTAAGTCTACAGAGCAACT????????????????????????
+x30ref26309M4I13M*00TTATAAAACAAATAATTAAGTCTACA??????????????????????????
+r00183ref37309M=7-39CAGCGCCAT*
+r001163ref7308M4I4M1D3M=3739TTAGATAAAGAGGATACTG*XX:B:S,12561,2,20,112
+r00316ref29306H5M*00TAGGC*
+x20ref223021M*00GGTTTTATAAAACAAATAATT?????????????????????
+x60ref2143023M*00TAATTAAGTCTACAGAGCAACTA???????????????????????
+x10ref213020M*00AGGTTTTATAAAACAAATAA????????????????????
+r0040ref16306M14N1I5M*00ATAGCTCTCAGC*
+x40ref2103025M*00CAAATAATTAAGTCTACAGAGCAAC?????????????????????????
+r0030ref9305H6M*00AGCTAA*
+root@localhost:~/tutorial# samtools view alignments.bam ref2:10-11
+[E::idx_find_and_load] Could not retrieve index file for 'alignments.bam'
+samtools view: Random alignment retrieval only works for indexed SAM.gz, BAM or CRAM files.
+root@localhost:~/tutorial# samtools --help
+
+Program: samtools (Tools for alignments in the SAM format)
+Version: 1.18 (using htslib 1.18)
+
+Usage:   samtools <command> [options]
+
+Commands:
+  -- Indexing
+     dict           create a sequence dictionary file
+     faidx          index/extract FASTA
+     fqidx          index/extract FASTQ
+     index          index alignment
+
+  -- Editing
+     calmd          recalculate MD/NM tags and '=' bases
+     fixmate        fix mate information
+     reheader       replace BAM header
+     targetcut      cut fosmid regions (for fosmid pool only)
+     addreplacerg   adds or replaces RG tags
+     markdup        mark duplicates
+     ampliconclip   clip oligos from the end of reads
+
+  -- File operations
+     collate        shuffle and group alignments by name
+     cat            concatenate BAMs
+     consensus      produce a consensus Pileup/FASTA/FASTQ
+     merge          merge sorted alignments
+     mpileup        multi-way pileup
+     sort           sort alignment file
+     split          splits a file by read group
+     quickcheck     quickly check if SAM/BAM/CRAM file appears intact
+     fastq          converts a BAM to a FASTQ
+     fasta          converts a BAM to a FASTA
+     import         Converts FASTA or FASTQ files to SAM/BAM/CRAM
+     reference      Generates a reference from aligned data
+     reset          Reverts aligner changes in reads
+
+  -- Statistics
+     bedcov         read depth per BED region
+     coverage       alignment depth and percent coverage
+     depth          compute the depth
+     flagstat       simple stats
+     idxstats       BAM index stats
+     cram-size      list CRAM Content-ID and Data-Series sizes
+     phase          phase heterozygotes
+     stats          generate stats (former bamcheck)
+     ampliconstats  generate amplicon specific stats
+
+  -- Viewing
+     flags          explain BAM flags
+     head           header viewer
+     tview          text alignment viewer
+     view           SAM<->BAM<->CRAM conversion
+     depad          convert padded BAM to unpadded BAM
+     samples        list the samples in a set of SAM/BAM/CRAM files
+
+  -- Misc
+     help [cmd]     display this help message or help for [cmd]
+     version        detailed version information
+
+root@localhost:~/tutorial# samtools index alignments.bam
+[E::hts_idx_push] Unsorted positions on sequence #2: 12 followed by 6
+[E::sam_index] Read 'x3' with ref_name='ref2', ref_length=40, flags=0, pos=6 cannot be indexed
+samtools index: failed to create index for "alignments.bam"
+root@localhost:~/tutorial# samtools sort alignments.bam > alignments.fixed.bam
+root@localhost:~/tutorial# samtools index alignments.fixed.bam
+root@localhost:~/tutorial# samtools view alignments.fixed.bam ref2:10-11
+x10ref213020M*00AGGTTTTATAAAACAAATAA????????????????????
+x20ref223021M*00GGTTTTATAAAACAAATAATT?????????????????????
+chr1    11873   12227   NR_046018_exon_0_0_chr1_11874_f 0       +
+chr1    12612   12721   NR_046018_exon_1_0_chr1_12613_f 0       +
+chr1    14361   14829   NR_024540_exon_0_0_chr1_14362_r 0       -
+chr1    14969   15038   NR_024540_exon_1_0_chr1_14970_r 0-
+chr1    15795   15947   NR_024540_exon_2_0_chr1_15796_r 0-
+chr1    16606   16765   NR_024540_exon_3_0_chr1_16607_r 0-
+chr1    16857   17055   NR_024540_exon_4_0_chr1_16858_r 0-
+chr1    17232   17368   NR_024540_exon_5_0_chr1_17233_r 0-
+chr1    17605   17742   NR_024540_exon_6_0_chr1_17606_r 0-
+chr1    17914   18061   NR_024540_exon_7_0_chr1_17915_r 0-
+chr1    18267   18366   NR_024540_exon_8_0_chr1_18268_r 0-
+chr1    24737   24891   NR_024540_exon_9_0_chr1_24738_r 0-
+chr1    29320   29370   NR_024540_exon_10_0_chr1_29321_r0-
+chr1    34610   35174   NR_026818_exon_0_0_chr1_34611_r 0-
+chr1    34610   35174   NR_026820_exon_0_0_chr1_34611_r 0-
+chr1    35276   35481   NR_026818_exon_1_0_chr1_35277_r 0-
+chr1    35276   35481   NR_026820_exon_1_0_chr1_35277_r 0-
+chr1    35720   36081   NR_026818_exon_2_0_chr1_35721_r 0-
+chr1    35720   36081   NR_026820_exon_2_0_chr1_35721_r 0-
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+"exons.bed" 19L, 1008B written
+root@localhost:~/tutorial# bedtools merge -i exons.bed
+chr11187312227
+chr11261212721
+chr11436114829
+chr11496915038
+chr11579515947
+chr11660616765
+chr11685717055
+chr11723217368
+chr11760517742
+chr11791418061
+chr11826718366
+chr12473724891
+chr12932029370
+chr13461035174
+chr13527635481
+chr13572036081
+root@localhost:~/tutorial# cat exons.bed > exons.fixed.bed
+root@localhost:~/tutorial# bedtools merge -i exons.fixed.bed
+chr11187312227
+chr11261212721
+chr11436114829
+chr11496915038
+chr11579515947
+chr11660616765
+chr11685717055
+chr11723217368
+chr11760517742
+chr11791418061
+chr11826718366
+chr12473724891
+chr12932029370
+chr13461035174
+chr13527635481
+chr13572036081
+root@localhost:~/tutorial# 
